@@ -41,7 +41,7 @@ func TestGetStepperHandler(t *testing.T) {
 	expectedSteps := 1500
 
 	// Add steps for 2020-02-25
-	req := jsonRequest(t, "PUT", "/stepper/2020-02-25", &StepsDto{Steps: expectedSteps})
+	req := jsonRequest(t, "PUT", "/stepper/2020-02-25", &Steps{Steps: expectedSteps})
 	resp := httptest.NewRecorder()
 	handler.ServeHTTP(resp, req)
 	assert.Equal(t, 200, resp.Code)
@@ -52,7 +52,7 @@ func TestGetStepperHandler(t *testing.T) {
 	handler.ServeHTTP(resp, req)
 	assert.Equal(t, 200, resp.Code)
 
-	var dto StepsDto
+	var dto Steps
 	json.NewDecoder(resp.Body).Decode(&dto)
 
 	assert.Equal(t, expectedSteps, dto.Steps)

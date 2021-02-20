@@ -1,9 +1,9 @@
 package stepper
 
 type StepperStats struct {
-	Min int `json:"min"`
-	Max int `json:"max"`
-	Avg int `json:"avg"`
+	Min int
+	Max int
+	Avg int
 }
 
 func GenerateStepperStats(repository *StepperReposistory) StepperStats {

@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-type StepsDto struct {
-	Steps int `json:"steps"`
+type Steps struct {
+	Steps int
 }
 
 func urlPathParts(path string) []string {
@@ -50,7 +50,7 @@ func CreateStepperHandler(repository *StepperReposistory) http.HandlerFunc {
 		} else if len(urlPathParts) == 2 {
 			// steps for day
 			day := urlPathParts[1]
-			dto := StepsDto{
+			dto := Steps{
 				Steps: repository.Get(day),
 			}
 			writeJsonToResponse(w, &dto)
@@ -71,7 +71,7 @@ func CreateStepperHandler(repository *StepperReposistory) http.HandlerFunc {
 
 		day := urlPathParts[1]
 
-		var req StepsDto
+		var req Steps
 		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
